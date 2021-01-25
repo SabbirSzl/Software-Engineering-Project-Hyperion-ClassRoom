@@ -1,0 +1,1426 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300&display=swap" rel="stylesheet">
+  <title></title>
+  <style>
+    body {
+      position: relative;
+      padding-top: 72px;
+      padding-left: 72px;
+      margin-left: 300px;
+    }
+
+    h1 {
+      font-size: 45px;
+    }
+
+    h2 {
+      font-size: 35px
+    }
+
+    h3 {
+      font-size: 30px;
+    }
+
+    h4 {
+      font-size: 20px;
+    }
+
+    .cover {
+      text-align: right;
+    }
+
+    .toc_section {
+      clear: both;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .toc_section div:nth-child(1) {
+      display: inline-block;
+    }
+
+    .toc_section div:nth-child(2) {
+      display: inline-block;
+      float: right;
+    }
+
+    .toc_subsection {
+      display: block;
+      clear: both;
+      padding-left: 40px;
+      margin-bottom: 10px;
+    }
+
+    .new_page {
+      page-break-before: always;
+    }
+
+    #hidden {
+      display: none;
+    }
+
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+
+      #hidden {
+        display: block;
+        height: auto;
+      }
+
+      .printable_content,
+      .printable_content * {
+        visibility: visible;
+        height: auto;
+      }
+
+      .printable_content {
+        position: relative;
+        margin-left: -350px;
+        padding-left: -72px;
+      }
+    }
+
+    .sidenav {
+
+      height: 100%;
+      width: 350px;
+      position: fixed;
+      z-index: 1;
+      top: 0;
+      left: 0;
+      background-color: #1B1B1B;
+      overflow-x: hidden;
+      padding-top: 25px;
+      font-family: 'Work Sans', sans-serif;
+    }
+
+    .sidenav a,
+    .sidenav h3 {
+      padding: 5px 6px 6px 16px;
+      text-decoration: none;
+      font-size: 18px;
+      color: #BDBDBD;
+      display: block;
+    }
+
+    .dropdown-btn {
+
+      padding: 5px 7px 6px 12px;
+      text-decoration: none;
+      font-size: 18px;
+      color: #BDBDBD;
+      background: #1B1B1B;
+      text-align: center;
+      display: inline-block;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      font-family: 'Work Sans', sans-serif;
+    }
+
+
+    .dropdown-container {
+      display: none;
+      background-color: #1B1B1B;
+      padding-left: 8px;
+    }
+
+    .print-button {
+      padding: 5px 6px 6px 16px;
+      text-decoration: none;
+      font-size: 22px;
+      color: #BDBDBD;
+      background: #1B1B1B;
+      text-align: center;
+      display: inline-block;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      font-family: 'Work Sans', sans-serif;
+    }
+
+    .fa-caret-down {
+      color: #BDBDBD;
+      float: right;
+      padding-left: 7px;
+    }
+
+    .dropdown-btn:focus {
+      border: none;
+    }
+
+    .sidenav a:hover {
+      color: #f1f1f1;
+      font-size: 19px;
+    }
+
+    .main {
+      margin-left: 160px;
+      padding: 0px 10px;
+    }
+
+    @media screen and (max-height: 450px) {
+      .sidenav {
+        padding-top: 15px;
+      }
+
+      .sidenav a {
+        font-size: 18px;
+      }
+    }
+  </style>
+
+</head>
+
+<body>
+  <div class="sidenav">
+    <h3>Table of Contents</h3>
+    <button class="dropdown-btn">1. Introduction
+      <i class="fa fa-angle-down"></i>
+    </button>
+    <div class="dropdown-container">
+      <a href="#purpose">1.1 Purpose</a>
+      <a href="#document_conventions">1.2 Document Conventions</a>
+      <a href="#Intended_Audience_and_Reading_Suggestion">1.3 Intended Audience and Reading Suggestion</a>
+      <a href="#product_scope">1.4 Product Scope</a>
+    </div>
+    <button class="dropdown-btn">2. Overall Description
+      <i class="fa fa-angle-down"></i>
+    </button>
+    <div class="dropdown-container">
+      <a href="#product_perspective">2.1 Product Perspective</a>
+      <a href="#product_fucntions">2.2. Product Functions</a>
+      <a href="#user_classes_characteristcs">2.3. User Classes and Characteristics</a>
+      <a href="#operating_environment">2.4. Operating Environments</a>
+      <a href="#design_and_implementation_constatins">2.5. Design and Implementation Constraints</a>
+      <a href="#user_documentation">2.6 User Documentation</a>
+      <a href="#assumptions_and_Dependencies">2.7 Assumptions and Dependencies</a>
+    </div>
+    <button class="dropdown-btn">3. External Interface Requirements
+      <i class="fa fa-angle-down"></i>
+    </button>
+    <div class="dropdown-container">
+      <a href="#i3_1">3.1 User Interfaces</a>
+      <a href="#i3_2">3.2 Hardware Interfaces</a>
+      <a href="#i3_3">3.3 Software Interfaces</a>
+      <a href="#i3_4">3.4 Communications Interfaces</a>
+    </div>
+
+    <button class="dropdown-btn">4. System Featrues
+      <i class="fa fa-angle-down"></i>
+    </button>
+    <div class="dropdown-container">
+      <a href="#i4_1">4.1 Sign Up </a>
+      <a href="#i4_2">4.2 Login</a>
+      <a href="#i4_3">4.3 Create a Class</a>
+      <a href="#i4_4">4.4 Join a Class</a>
+      <a href="#i4_5">4.5 Create a post</a>
+      <a href="#i4_6">4.6 Comment on a post</a>
+      <a href="#i4_7">4.7 Assign a task</a>
+      <a href="#i4_8">4.8 Submit an assigned task</a>
+      <a href="#i4_9">4.9 Upload a document</a>
+      <a href="#i4_10">4.10 Upload a document</a>
+      <a href="#i4_11">4.11 View a deocument</a>
+      <a href="#i4_12">4.12 Updating a User</a>
+      <a href="#i4_13">4.13 Deleting a User</a>
+    </div>
+
+    <button class="dropdown-btn">5. Other Nonfucntional Requirements
+      <i class="fa fa-angle-down"></i>
+    </button>
+    <div class="dropdown-container">
+      <a href="#i5_1">5.1 Performance Requirements</a>
+      <a href="#i5_2">5.2 Safety Requirements </a>
+      <a href="#i5_3">5.3 Security Requiremnts </a>
+      <a href="#i5_4">5.4 Software Quality Attributes</a>
+      <a href="#i5_5">5.5 Business Rules</a>
+
+    </div>
+
+    <button class="dropdown-btn">6. Other Requrements
+      <i class="fa fa-angle-down"></i>
+    </button>
+    <div class="dropdown-container">
+      <a href="#i6_1">Appendix A: Glossary</a>
+      <a href="#i6_2">Appendix B:To Be Determined List</a>
+    </div>
+
+    </br></br>
+    <input class="dropdown-btn" type="button" onclick="window.print()" value="Print the document" />
+
+  </div>
+  <script>
+    var dropdown = document.getElementsByClassName("dropdown-btn");
+    var i;
+
+    for (i = 0; i < dropdown.length; i++) {
+      dropdown[i].addEventListener("click", function () {
+        this.classList.toggle("active");
+        var dropdownContent = this.nextElementSibling;
+        if (dropdownContent.style.display === "block") {
+          dropdownContent.style.display = "none";
+        } else {
+          dropdownContent.style.display = "block";
+        }
+      });
+    }
+  </script>
+
+  <div class="printable_content" style="text-align: right; display: block;">
+    <h1>Software Requirements Specification</h1>
+    <h3>for</h3>
+    <h2>Hyperion Classroom Software System</h2>
+    <h4>Version 1.0</h4>
+    <h4 style="margin-bottom: 0px;">Prepared by,</h4>
+    <p style="margin-top: 0px;">
+      Shahriar Khan, ID: 1821133042</br>
+      Muhammad Abdullah Zul-Ikram, ID: 182185042</br>
+      Sabbir Ahmed Sozol, ID: 1821926042
+    </p>
+    <h4>North South University</h4>
+    <h4>Nov 22, 2020</h4>
+  </div>
+
+  <div class="printable_content new_page" id="hidden">
+    <h3>Table of Contents</h3>
+    <div class="toc_section">
+      <div>Table of Contents</div>
+      <div>i</div>
+    </div>
+    <div class="toc_section">
+      <div>Revision History</div>
+      <div>ii</div>
+    </div>
+    <div class="toc_section">
+      <div>1. Introduction</div>
+      <div>1</div>
+    </div>
+    <div class="toc_subsection">
+      <div class="toc_section">
+        <div>1.1 Purpose</div>
+        <div>1</div>
+      </div>
+
+      <div class="toc_section">
+        <div>1.2 Document Conventions </div>
+        <div>1</div>
+      </div>
+
+      <div class="toc_section">
+        <div>1.3 Intended Audience and Reading Suggestions </div>
+        <div>1</div>
+      </div>
+
+      <div class="toc_section">
+        <div>1.4 Product Scope </div>
+        <div>1</div>
+      </div>
+    </div>
+
+    <div class="toc_section">
+      <div>2. Overall Description</div>
+      <div>2</div>
+    </div>
+    <div class="toc_subsection">
+      <div class="toc_section">
+        <div>2.1 Product Perspective </div>
+        <div>2</div>
+      </div>
+      <div class="toc_section">
+        <div>2.2 Product Functions</div>
+        <div>2</div>
+      </div>
+
+      <div class="toc_section">
+        <div>2.3 User Classes and Characteristics</div>
+        <div>2</div>
+      </div>
+
+      <div class="toc_section">
+        <div>2.4 Operating Environment </div>
+        <div>3</div>
+      </div>
+
+      <div class="toc_section">
+        <div>2.5 Design and Implementation Constraints </div>
+        <div>3</div>
+      </div>
+
+      <div class="toc_section">
+        <div>2.6 User Documentation</div>
+        <div>3</div>
+      </div>
+
+      <div class="toc_section">
+        <div>2.7 Assumptions and Dependencies </div>
+        <div>3</div>
+      </div>
+    </div>
+
+    <div class="toc_section">
+      <div>3 External Interface Requirements </div>
+      <div>4</div>
+    </div>
+    <div class="toc_subsection">
+      <div class="toc_section">
+        <div>3.1 User Interfaces </div>
+        <div>4</div>
+      </div>
+
+      <div class="toc_section">
+        <div>3.2 Hardware Interfaces </div>
+        <div>4</div>
+      </div>
+
+      <div class="toc_section">
+        <div>3.3 Software Interfaces </div>
+        <div>4</div>
+      </div>
+
+      <div class="toc_section">
+        <div>3.4 Communications Interfaces </div>
+        <div>4</div>
+      </div>
+    </div>
+
+    <div class="toc_section">
+      <div>4. System Features </div>
+      <div>5</div>
+    </div>
+    <div class="toc_subsection">
+      <div class="toc_section">
+        <div>4.1 Signing Up</div>
+        <div>6</div>
+      </div>
+
+      <div class="toc_section">
+        <div>4.2 Loggin In</div>
+        <div>6</div>
+      </div>
+
+      <div class="toc_section">
+        <div>4.3 Creating a Class</div>
+        <div>7</div>
+      </div>
+
+      <div class="toc_section">
+        <div>4.4 Joining a Class</div>
+        <div>7</div>
+      </div>
+
+      <div class="toc_section">
+        <div>4.5 Creating a Post</div>
+        <div>8</div>
+      </div>
+
+      <div class="toc_section">
+        <div>4.6 Commenting on a Post</div>
+        <div>8</div>
+      </div>
+
+      <div class="toc_section">
+        <div>4.7 Asiisgning a Task</div>
+        <div>9</div>
+      </div>
+
+      <div class="toc_section">
+        <div>4.8 Submitting an Assigned Task</div>
+        <div>10</div>
+      </div>
+
+      <div class="toc_section">
+        <div>4.9 Uploading a Document</div>
+        <div>10</div>
+      </div>
+
+      <div class="toc_section">
+        <div>4.10 Viewing a Document</div>
+        <div>11</div>
+      </div>
+
+      <div class="toc_section">
+        <div>4.11 Viewing Per-Student Document Viewing Report</div>
+        <div>12</div>
+      </div>
+
+      <div class="toc_section">
+        <div>4.12 Update a User</div>
+        <div>12</div>
+      </div>
+
+      <div class="toc_section">
+        <div>4.13 Delete a User</div>
+        <div>13</div>
+      </div>
+    </div>
+
+    <div class="toc_section">
+      <div>5 Other Nonfunctional Requirements </div>
+      <div>15</div>
+    </div>
+    <div class="toc_subsection">
+      <div class="toc_section">
+        <div>5.1 Performance Requirements </div>
+        <div>15</div>
+      </div>
+
+      <div class="toc_section">
+        <div>5.2 Safety Requirements</div>
+        <div>15</div>
+      </div>
+
+      <div class="toc_section">
+        <div>5.3 Security Requirements</div>
+        <div>15</div>
+      </div>
+
+      <div class="toc_section">
+        <div>5.4 Software Quality Attributes</div>
+        <div>15</div>
+      </div>
+
+      <div class="toc_section">
+        <div>5.5 Business Rules</div>
+        <div>15</div>
+      </div>
+    </div>
+
+    <div class="toc_section">
+      <div>6. Other Requirements</div>
+      <div>16</div>
+    </div>
+
+    <div class="toc_section">
+      <div>Appendix A: Glossary</div>
+      <div>16</div>
+    </div>
+
+    <div class="toc_section">
+      <div>Appendix B: To Be Determined List </div>
+      <div>16</div>
+    </div>
+  </div>
+
+  <div class="printable_content new_page">
+    <h3>1. Introduction</h3>
+    <h4 id="purpose">1.1 Purpose</h4>
+    </p>The software discussed in this SRS is a virtual platform that simplifies the interactions between students and
+    teachers.
+    The software will facilitate the distribution of class tasks and offer student activity monitoring during
+    interaction time. </p>
+
+    <h4 id="document_conventions">1.2 Document Conventions</h4>
+    <p>We use the standard HTML convention to create headers and subheaders for different sections. In section 4, we
+      used tables to visualize expanded use cases. The web page is printable from the browser and uses the standard IEEE
+      convention for software requirements specification (SRS) document.</p>
+
+    <h4 id="Intended_Audience_and_Reading_Suggestion">1.3 Intended Audience and Reading Suggestion</h4>
+    <p>Teachers, students, and invigilator who wants a robust assignment and task distribution system with monitoring
+      features are the primary audience for this software. </p>
+
+    <h4 id="product_scope">1.4 Product Scope</h4>
+    <p>The software is a virtual platform for student and teacher interacion. The software will give additional
+      advantage of monitoring tools that can be used by a teacher.
+      It can also provide analytics and reports from these tools that a teacher can use to ensure fair grading. The
+      rpoduct can be used by teachers and students from different instituions
+      to provide a seamless experience for both students and teachers.
+    </p>
+  </div>
+
+  <div class="printable_content new_page">
+    <h3>2. Overall Description</h3>
+    <h4 id="product_perspective"> 2.1 Product Perspective</h4>
+    <p>Due to the global pandemic, the demand for an online platform for student-teacher interaction has grown. The need
+      for a virtual platform that can substitute the traditional classroom and create a fast distribution system has
+      inspired us to take this project. Softwares like google classroom already offer such a platform but, our software
+      aims to offer a monitoring tool that can ease the job of invigilators and teachers and provide them with analytics
+      that will aid them to ensure fair grading.</p>
+
+    <h4 id="product_fucntions">2.2. Product Functions</h4>
+    <p> The major system functions are given below: </p>
+    <ul>
+      <li>Users create account using their email or sign in using gmail.</li>
+      <li>Teacher can create a classroom for interaction.</li>
+      <li>Teacher and students can post on classroom and comment on posts</li>
+      <li>Monitor student whether their eye is open or not while reading documents.</li>
+      <li>Use facial recognition to cross-check student identity</li>
+      <li>Monitor student engagement in particular topic of a task.</li>
+      <li>Deliver all monitoring report to teacher.</li>
+    </ul>
+
+    <h4 id="user_classes_characteristcs">2.3. User Classes and Characteristics</h4>
+    <p> The following are the user classes in our software:</p>
+    <ol>
+      <li>System Admin
+        <ul>
+          <li>Has system database access.</li>
+          <li>Can update or modify a user.</li>
+        </ul>
+      </li>
+      <li>Teacher</li>
+      <ul>
+        <li>Create a classroom</li>
+        <li>Create Posts</li>
+        <li>Comment on Posts</li>
+        <li>Use monitoring tools.</li>
+        <li>Upload questions.</li>
+        <li>Grade students.</li>
+      </ul>
+      <li>Student</li>
+      <ul>
+        <li>Join a class</li>
+        <li>Create Post</li>
+        <li>Comment on posts</li>
+        <li>View documents</li>
+        <li>View grades</li>
+      </ul>
+    </ol>
+    <p>User class "Teacher" is the most important and privileged in this system. This user class can interact with
+      teacher and use speicfic monitoring tools that are exclusive only to
+      the teacher. Students are less privelged and has limited accessibility. The system admin is a special user class
+      that is reserved for system administrators who can revoke or modify user accounts.
+    </p>
+
+    <h4 id="operating_environment">2.4. Operating Environments</h4>
+    <p>Following are the system requirements for the software:</p>
+    <ul>
+      Computer<br>
+      <li> Hardware: x64/x34</li>
+      <li> Operating System: Windows/Linux</li><br>
+      Android<br>
+      <li> Hardware: ARM architecture</li>
+      <li> Operating System: Android 7.0+</li>
+    </ul>
+
+    <h4 id="design_and_implementation_constatins">2.5. Design and Implementation Constraints</h4>
+    List of Constraints are given here:
+    <ul>
+      <li>User facial snapshots won't be stored for privacy reason</li>
+      <li>User must be notified before accessing their camera</li>
+      <li>User credentials must be checked every session</li>
+      <li>User will be notified of the tools that will be used for monitoring</li>
+    </ul>
+
+    <h4 id="user_documentation">2.6 User Documentation</h4>
+    <p>The software is designed to be user friendly. The software will contain intuitive features that the user can
+      learn quickly. There will also be an FAQ page for easy solutions.</p>
+
+    <h4 id="assumptions_and_Dependencies">2.7 Assumptions and Dependencies</h4>
+    <p> The software will depend on third party api from Microsoft or Google for face recognition, eye tracking or
+      student engagement. The limitations of the API can limit the performance of the software</p>
+  </div>
+
+  <div class="printable_content new_page">
+    <h3>3. External Interface Requirements</h3>
+    <h4 id="i3_1">3.1 User Interfaces </h4>
+    <p>The software will contain a login page where signup option will also be available. User can also choose to signup
+      using Gmail. After login/signup user will see dashboard according
+      to their user class. The "teacher" user then can create a class and create and comment posts. The "student" user
+      can use their interface to join a class. The teacher can use monitoring
+      tools from dashboard interface. The teacher can also receive report and analytics from dashboard. The web app and
+      android app will have similar interface.
+    </p>
+
+    <h4 id="i3_2">3.2 Hardware Interfaces</h4>
+    <p> Computer:
+    <ul>
+      <li>Ram: 1 GB</li>
+      <li>OS: windows/linux</li>
+      <li>Webcam: Minimum 4mp</li>
+    </ul>
+    Android:
+    <ul>
+      <li>OS: Android 7.0+</li>
+      <li> Front camera: Minimum 4mp</li>
+    </ul>
+    </p>
+
+    <h4 id="i3_3">3.3 Software Interfaces</h4>
+    <p>The software needs a database. So we will be using good database management system software. Also, we will be
+      integrating third party api in our software like MS Azure or Google vision API. We will use
+      any modern browser with support for javascript, html5 and css.<br>
+      For android phone, we will use native andriod app development kit and kotlin.
+    </p>
+
+    <h4 id="i3_4">3.4 Communications Interfaces</h4>
+    <p>
+      Communication between system and user will occur using api that will facilitate email notifications. Face
+      recognition and eye track tool will notify user before action.
+    </p>
+  </div>
+
+  <div class="printable_content new_page">
+    <h3>4. System Features</h3>
+    <p style="margin-bottom: 0px; padding-bottom: 0px;">The system primarily has three types of users:</p>
+    <ol type="1">
+      <li>Teacher</li>
+      <li>Student</li>
+      <li>System Admin</li>
+    </ol>
+
+    <img src="assets/use-case-diagram-teacher.png" alt="Use Case Digram: Teacher" width="50%"></img></br>
+    <img src="assets/use-case-diagram-student.png" alt="Use Case Digram: Teacher" width="50%"></img></br>
+    <img src="assets/use-case-diagram-system-admin.png" alt="Use Case Digram: Teacher" width="50%"></img>
+
+    <h4 id="i4_1">4.1 Signing Up </h4>
+    <p style="padding-bottom: 0px; margin-bottom: 0px;">
+      <b>Use Case Name:</b> Sign Up</br>
+      <b>Use Case Type:</b> Secondary</br>
+      <b>Actor(s):</b> Teacher, Student</br>
+      <b>Brief Description:</b> The actor provides personal details and registers for the Classroom.</br>
+      <b>Typical Course of Events:</b>
+    </p>
+    <table border="1" style="width: 75%; margin-top: 0px">
+      <tr>
+        <th>Actor Action</th>
+        <th>System Response</th>
+      </tr>
+      <tr>
+        <td>1. Actor visits the website.</td>
+        <td>2. System shows the login page.</td>
+      </tr>
+      <tr>
+        <td>3. Actor clicks on the <i>Sign Up</i> button.</td>
+        <td>4. System shows the registration page.</td>
+      </tr>
+      <tr>
+        <td>5. Actor fills up the registration form.</td>
+        <td>6. System checks if the required fields are filled.</td>
+      </tr>
+      <tr>
+        <td>7. Actor click on the <i>Submit</i> button.</td>
+        <td>8. System registers the user.</td>
+      </tr>
+    </table>
+    <p style="padding-top: 0px; margin-top: 0px;">
+      <b>Alternate Course of Events:</b></br>
+      6.1 If the required fields are not filled, system prompts actor to fill them.
+    </p>
+
+    </br>
+
+    <h4 id="i4_2">4.2 Logging In</h4>
+    <p style="padding-bottom: 0px; margin-bottom: 0px;">
+      <b>Use Case Name:</b> Login</br>
+      <b>Use Case Type:</b> Secondary</br>
+      <b>Actor(s):</b> Teacher, Student</br>
+      <b>Brief Description:</b> The actor logs into the website in order to get access.</br>
+      <b>Typical Course of Events:</b>
+    </p>
+    <table border="1" style="width: 75%; margin-top: 0px">
+      <tr>
+        <th>Actor Action</th>
+        <th>System Response</th>
+      </tr>
+      <tr>
+        <td>1. Actor visits the website.</td>
+        <td>2. System shows the login page.</td>
+      </tr>
+      <tr>
+        <td>3. Actor enters the credentials and press on <i>Submit</i> button.</td>
+        <td>4. System verifies the credentials and redirects to the user dashboard.</td>
+      </tr>
+    </table>
+    <p style="padding-top: 0px; margin-top: 0px;">
+      <b>Alternate Course of Events:</b></br>
+      4.1 If email or/and password is not valid, system prompts user to re-enter it/them.</br>
+      4.2 After three attempts, system asks actor his/her registered email address.
+      System then sends a password reset link to the email address.</br>
+      4.2.1 If the email address does not exist in the database, system shows a warning that
+      the account does not exist.
+    </p>
+
+    </br>
+
+    <h4 id="i4_3">4.3 Creating a Class</h4>
+    <p style="padding-bottom: 0px; margin-bottom: 0px;">
+      <b>Use Case Name:</b> Create a class</br>
+      <b>Use Case Type:</b> Primary</br>
+      <b>Actor(s):</b> Teacher</br>
+      <b>Brief Description:</b> Actor creates a virtual classroom where he can interact with students who join it.</br>
+      <b>Typical Course of Events:</b>
+    </p>
+    <table border="1" style="width: 75%; margin-top: 0px">
+      <tr>
+        <th>Actor Action</th>
+        <th>System Response</th>
+      </tr>
+      <tr>
+        <td>1. Actor visits the website.</td>
+        <td>2. System shows the login page.</td>
+      </tr>
+      <tr>
+        <td>3. Actor enters his/her credentials.</td>
+        <td>4. System verifies the credentials and redirects to the user dashboard.</td>
+      </tr>
+      <tr>
+        <td>5. Actor clicks on the menu.</td>
+        <td>6. System expands the menu.</td>
+      </tr>
+      <tr>
+        <td>7. Actor chooses the option to create a class.</td>
+        <td>8. System asks user to enter a name for the class.</td>
+      </tr>
+      <tr>
+        <td>9. Actor enters a name for the class and confirms it.</td>
+        <td>10. System verifies the class name and redirects to the newly created class</td>
+      </tr>
+    </table>
+    <p style="padding-top: 0px; margin-top: 0px;">
+      <b>Alternate Course of Events:</b></br>
+      4.1 If email or/and password is not valid, system prompts user to re-enter it/them.</br>
+      4.2 After three attempts, system asks actor his/her registered email address.
+      System then sends a password reset link to the email address.</br>
+      4.2.1 If the email address does not exist in the database, system shows a warning that
+      the account does not exist.</br>
+      10.1 If the class name does not meet the requirements, system shows a warning and prompts user to re-enter.
+    </p>
+
+    </br>
+
+    <h4 id="i4_4">4.4 Joining a Class</h4>
+    <p style="padding-bottom: 0px; margin-bottom: 0px;">
+      <b>Use Case Name:</b> Join a class</br>
+      <b>Use Case Type:</b> Primary</br>
+      <b>Actor(s):</b> Student</br>
+      <b>Brief Description:</b> Actor join a virtual classroom where he can interact with its teacher/s and
+      students.</br>
+      <b>Typical Course of Events:</b>
+    </p>
+    <table border="1" style="width: 75%; margin-top: 0px">
+      <tr>
+        <th>Actor Action</th>
+        <th>System Response</th>
+      </tr>
+      <tr>
+        <td>1. Actor visits the website.</td>
+        <td>2. System shows the login page.</td>
+      </tr>
+      <tr>
+        <td>3. Actor enters his/her credentials.</td>
+        <td>4. System verifies the credentials and redirects to the user dashboard.</td>
+      </tr>
+      <tr>
+        <td>5. Actor clicks on the menu.</td>
+        <td>6. System expands the menu.</td>
+      </tr>
+      <tr>
+        <td>7. Actor chooses the option to join a class.</td>
+        <td>8. System pops up a window prompting user to enter class code.</td>
+      </tr>
+      <tr>
+        <td>9. Actor enters the code for a class and confirms it.</td>
+        <td>10. System verifies the class code and redirects to the class</td>
+      </tr>
+    </table>
+    <p style="padding-top: 0px; margin-top: 0px;">
+      <b>Alternate Course of Events:</b></br>
+      4.1 If email or/and password is not valid, system prompts user to re-enter it/them.</br>
+      4.2 After three attempts, system asks actor his/her registered email address.
+      System then sends a password reset link to the email address.</br>
+      4.2.1 If the email address does not exist in the database, system shows a warning that
+      the account does not exist.</br>
+      10.1 If the class code does not match with any created classes, system pops up error message "Class does not
+      exist".
+    </p>
+
+    </br>
+
+    <h4 id="i4_5">4.5 Creating a Post</h4>
+    <p style="padding-bottom: 0px; margin-bottom: 0px;">
+      <b>Use Case Name:</b> Create a post</br>
+      <b>Use Case Type:</b> Primary</br>
+      <b>Actor(s):</b> Teacher, Student</br>
+      <b>Brief Description:</b> Creating posts is the primary method of interaction between teachers and students.
+      There can be different types of posts — announcements, updates, reminders, polls, questions, etc.
+      A teacher creates posts to make announcements, provide class materials, conduct polls etc.
+      Students create posts to ask their teacher questions, discuss problems between themselves, etc.</br>
+      <b>Typical Course of Events:</b>
+    </p>
+    <table border="1" style="width: 75%; margin-top: 0px">
+      <tr>
+        <th>Actor Action</th>
+        <th>System Response</th>
+      </tr>
+      <tr>
+        <td>1. Actor visits the website.</td>
+        <td>2. System shows the login page.</td>
+      </tr>
+      <tr>
+        <td>3. Actor enters his/her credentials.</td>
+        <td>4. System verifies the credentials and redirects to the user dashboard where classes are visible.</td>
+      </tr>
+      <tr>
+        <td>5. Actor clicks on a class to enter.</td>
+        <td>6. System shows the stream of the class actor clicked on.</td>
+      </tr>
+      <tr>
+        <td>7. Actor clicks on <i>Create a post</i> button.</td>
+        <td>8. System pops up a dialogue window where user can type the message.</td>
+      </tr>
+      <tr>
+        <td>9. Actor select the post type and inputs the message.</td>
+        <td>10. System verifies the post and updates the class stream</td>
+      </tr>
+    </table>
+    <p style="padding-top: 0px; margin-top: 0px;">
+      <b>Alternate Course of Events:</b></br>
+      4.1 If email or/and password is not valid, system prompts user to re-enter it/them.</br>
+      4.2 After three attempts, system asks actor his/her registered email address.
+      System then sends a password reset link to the email address.</br>
+      4.2.1 If the email address does not exist in the database, system shows a warning that
+      the account does not exist.</br>
+      10.1 If the post type is not selected, system prompts user to select it.</br>
+      10.2 If the post is empty, system pops up message "Write something".</br>
+    </p>
+
+    </br>
+
+    <h4 id="i4_6">4.6 Commenting on a Post</h4>
+    <p style="padding-bottom: 0px; margin-bottom: 0px;">
+      <b>Use Case Name:</b> Comment on a post</br>
+      <b>Use Case Type:</b> Primary</br>
+      <b>Actor(s):</b> Teacher, Student</br>
+      <b>Brief Description:</b> Actors can comment on a post made in a class. Comments must be in text format.</br>
+      <b>Typical Course of Events:</b>
+    </p>
+    <table border="1" style="width: 75%; margin-top: 0px">
+      <tr>
+        <th>Actor Action</th>
+        <th>System Response</th>
+      </tr>
+      <tr>
+        <td>1. Actor visits the website.</td>
+        <td>2. System shows the login page.</td>
+      </tr>
+      <tr>
+        <td>3. Actor enters his/her credentials.</td>
+        <td>4. System verifies the credentials and redirects to the user dashboard where classes are visible.</td>
+      </tr>
+      <tr>
+        <td>5. Actor clicks on a class to enter.</td>
+        <td>6. System shows the stream of the class actor clicked on.</td>
+      </tr>
+      <tr>
+        <td>7. Actor clicks on a post in the class stream.</td>
+        <td>8. System expands the post; comment box for the post is visible.</td>
+      </tr>
+      <tr>
+        <td>9. Actor types his/her message in the comment box and clicks on <i>Send</i>.</td>
+        <td>10. System displays the posted message.</td>
+      </tr>
+    </table>
+    <p style="padding-top: 0px; margin-top: 0px;">
+      <b>Alternate Course of Events:</b></br>
+      4.1 If email or/and password is not valid, system prompts user to re-enter it/them.</br>
+      4.2 After three attempts, system asks actor his/her registered email address.
+      System then sends a password reset link to the email address.</br>
+      4.2.1 If the email address does not exist in the database, system shows a warning that
+      the account does not exist.</br>
+      10.1 If the comment box is empty, system pops up message "Write something".</br>
+    </p>
+
+    </br>
+
+    <h4 id="i4_7">4.7 Assigning a Task</h4>
+    <p style="padding-bottom: 0px; margin-bottom: 0px;">
+      <b>Use Case Name:</b>Assign a task</br>
+      <b>Use Case Type:</b>Primary</br>
+      <b>Actor(s):</b>Teacher</br>
+      <b>Brief Description:</b>Actor will assign a task for students in his/her class.
+      Actor must set the title of the task. Actor can type (a) question/s or attach a document from
+      his/her uplaods. Actor can include additional details. Deadline can be set.
+      By default, the task will be assigned to every students in the class but actor can manage the scope.</br>
+      <b>Typical Course of Events:</b>
+    </p>
+    <table border="1" style="width: 75%; margin-top: 0px">
+      <tr>
+        <th>Actor Action</th>
+        <th>System Response</th>
+      </tr>
+      <tr>
+        <td>1. Actor visits the website.</td>
+        <td>2. System shows the login page.</td>
+      </tr>
+      <tr>
+        <td>3. Actor enters his/her credentials.</td>
+        <td>4. System verifies the credentials and redirects to the user dashboard where classes are visible.</td>
+      </tr>
+      <tr>
+        <td>5. Actor clicks on a class to enter.</td>
+        <td>6. System shows the stream of the class actor clicked on.</td>
+      </tr>
+      <tr>
+        <td>7. Actor clicks on <i>Tasks</i>.</td>
+        <td>8. System directs to <i>Tasks</i> tab and displays the pending and completed tasks
+          (if there is any).</td>
+      </tr>
+      <tr>
+        <td>9. Actor clicks on <i>Create a Task</i>.</td>
+        <td>10. System pops up a window with options to create a task</td>
+      </tr>
+      <tr>
+        <td>11. Actor add details, set assignees, set submission type, set deadline
+          and click on <i>Submit</i>.</td>
+        <td>12. System verifies the entries and broadcasts the task to the assignees.</td>
+      </tr>
+    </table>
+    <p style="padding-top: 0px; margin-top: 0px;">
+      <b>Alternate Course of Events:</b></br>
+      4.1 If email or/and password is not valid, system prompts user to re-enter it/them.</br>
+      4.2 After three attempts, system asks actor his/her registered email address.
+      System then sends a password reset link to the email address.</br>
+      4.2.1 If the email address does not exist in the database, system shows a warning that
+      the account does not exist.</br>
+      12.1 If any of the required fields are not filled, system prompts user to fill it/them in.
+    </p>
+
+    </br>
+
+    <h4 id="i4_8">4.8 Submitting an Assigned Task</h4>
+    <p style="padding-bottom: 0px; margin-bottom: 0px;">
+      <b>Use Case Name:</b> Submit an assigned task</br>
+      <b>Use Case Type:</b> Primary</br>
+      <b>Actor(s):</b> Student</br>
+      <b>Brief Description:</b> Actor submits a task which s/he assigned by his/her teacher.</br>
+      <b>Typical Course of Events:</b>
+    </p>
+    <table border="1" style="width: 75%; margin-top: 0px">
+      <tr>
+        <th>Actor Action</th>
+        <th>System Response</th>
+      </tr>
+      <tr>
+        <td>1. Actor visits the website.</td>
+        <td>2. System shows the login page.</td>
+      </tr>
+      <tr>
+        <td>3. Actor enters his/her credentials.</td>
+        <td>4. System verifies the credentials and redirects to the user dashboard
+          where classes are visible.</td>
+      </tr>
+      <tr>
+        <td>5. Actor clicks on a class to enter.</td>
+        <td>6. System shows the stream of the class actor clicked on.</td>
+      </tr>
+      <tr>
+        <td>7. Actor clicks on <i>Tasks</i>.</td>
+        <td>8. System directs to <i>Tasks</i> tab and displays the pending and completed tasks
+          (if there is any).</td>
+      </tr>
+      <tr>
+        <td>9. Actor clicks on a pending task s/he wish to submit.</td>
+        <td>10. System pops up a windows displaying task details with option to submit.</td>
+      </tr>
+      <tr>
+        <td>11. Actor either types his/her answer or uploads a file; then clicks on <i>Submit</i></td>
+        <td>12. System displays a confirmation dialog.</td>
+      </tr>
+      <tr>
+        <td>13. Actor confirms the submission.</td>
+        <td>14. System marks the task as 'Completed' and redirects to <i>Tasks</i> tab</td>
+      </tr>
+    </table>
+    <p style="padding-top: 0px; margin-top: 0px;">
+      <b>Alternate Course of Events:</b></br>
+      4.1 If email or/and password is not valid, system prompts user to re-enter it/them.</br>
+      4.2 After three attempts, system asks actor his/her registered email address.
+      System then sends a password reset link to the email address.</br>
+      4.2.1 If the email address does not exist in the database, system shows a warning that
+      the account does not exist.</br>
+      14.1 If the task is submitted after deadline, system marks the task as 'Late Submission' and
+      sends a notification to the teacher.
+    </p>
+
+    </br>
+
+    <h4 id="i4_9">4.9 Uploading a Document</h4>
+    <p style="padding-bottom: 0px; margin-bottom: 0px;">
+      <b>Use Case Name:</b> Upload a document</br>
+      <b>Use Case Type:</b> Primary</br>
+      <b>Actor(s):</b> Teacher</br>
+      <b>Brief Description:</b> Actor uploads a document and publish it so that students can view.
+      Or actor can upload a document without publishing which can be later attached with a task.</br>
+      <b>Typical Course of Events:</b>
+    </p>
+    <table border="1" style="width: 75%; margin-top: 0px">
+      <tr>
+        <th>Actor Action</th>
+        <th>System Response</th>
+      </tr>
+      <tr>
+        <td>1. Actor visits the website.</td>
+        <td>2. System shows the login page.</td>
+      </tr>
+      <tr>
+        <td>3. Actor enters his/her credentials.</td>
+        <td>4. System verifies the credentials and redirects to the user dashboard
+          where classes are visible.</td>
+      </tr>
+      <tr>
+        <td>5. Actor clicks on a class to enter.</td>
+        <td>6. System shows the stream of the class actor clicked on.</td>
+      </tr>
+      <tr>
+        <td>7. Actor clicks on <i>Materials</i> tab.</td>
+        <td>8. System directs to <i>Materials</i> tab and displays the previously uploaded documents
+          (if there is any).</td>
+      </tr>
+      <tr>
+        <td>9. Actor clicks on <i>Upload a document</i> button.</td>
+        <td>10. System displays a window with options to upload a document file.</td>
+      </tr>
+      <tr>
+        <td>11. Actor uploads a document file, adding details.</td>
+        <td>12. System verifies the file type.</td>
+      </tr>
+      <tr>
+        <td>13. Actor ticks the option to publish and the confirms the upload.</td>
+        <td>14. System broadcasts the document to students and redirects to <i>Materials</i> tab.</td>
+      </tr>
+    </table>
+    <p style="padding-top: 0px; margin-top: 0px;">
+      <b>Alternate Course of Events:</b></br>
+      4.1 If email or/and password is not valid, system prompts user to re-enter it/them.</br>
+      4.2 After three attempts, system asks actor his/her registered email address.
+      System then sends a password reset link to the email address.</br>
+      4.2.1 If the email address does not exist in the database, system shows a warning that
+      the account does not exist.</br>
+      12.1 If the file type does not verify, system pops up a warning message.
+      14.1 If actor selected the monitoring option, system starts monitoring the file for any
+      views/interactions.
+    </p>
+
+    </br>
+
+    <h4 id="i4_10">4.10 Viewing a Document</h4>
+    <p style="padding-bottom: 0px; margin-bottom: 0px;">
+      <b>Use Case Name:</b> View a document</br>
+      <b>Use Case Type:</b> Primary</br>
+      <b>Actor(s):</b> Student</br>
+      <b>Brief Description:</b> Actor views a document uploaded by the teacher. Actor gets monitored
+      during the time of his viewing of the document if the uploader enabled monitoring.</br>
+      <b>Typical Course of Events:</b>
+    </p>
+    <table border="1" style="width: 75%; margin-top: 0px">
+      <tr>
+        <th>Actor Action</th>
+        <th>System Response</th>
+      </tr>
+      <tr>
+        <td>1. Actor visits the website.</td>
+        <td>2. System shows the login page.</td>
+      </tr>
+      <tr>
+        <td>3. Actor enters his/her credentials.</td>
+        <td>4. System verifies the credentials and redirects to the user dashboard
+          where classes are visible.</td>
+      </tr>
+      <tr>
+        <td>5. Actor clicks on a class to enter.</td>
+        <td>6. System shows the stream of the class actor clicked on.</td>
+      </tr>
+      <tr>
+        <td>7. Actor clicks on <i>Materials</i> tab.</td>
+        <td>8. System directs to <i>Materials</i> tab and displays the documents uploaded by the
+          teacher (if there is any).</td>
+      </tr>
+      <tr>
+        <td>9. Actor clicks on a document.</td>
+        <td>10. System displays the document in a window and monitors the actor.</td>
+      </tr>
+      <tr>
+        <td>11. Actor closes the document.</td>
+        <td>12. System generates a report based on the monitoring of the user.</td>
+      </tr>
+    </table>
+    <p style="padding-top: 0px; margin-top: 0px;">
+      <b>Alternate Course of Events:</b></br>
+      4.1 If email or/and password is not valid, system prompts user to re-enter it/them.</br>
+      4.2 After three attempts, system asks actor his/her registered email address.
+      System then sends a password reset link to the email address.</br>
+      4.2.1 If the email address does not exist in the database, system shows a warning that
+      the account does not exist.</br>
+      8.1 If there is no document to display, system shows "No document to display" message.</br>
+      10.1 If the system does not detect a webcam, it prompts actor to connect one.</br>
+      10.2 If the actor is not 'properly' and clearly visible through webcam, system pops up
+      a warning message.
+    </p>
+
+    </br>
+
+    <h4 id="i4_11">4.11 Viewing Per-Student Document Viewing Report</h4>
+    <p style="padding-bottom: 0px; margin-bottom: 0px;">
+      <b>Use Case Name:</b> View per-student document viewing report</br>
+      <b>Use Case Type:</b> Primary</br>
+      <b>Actor(s):</b> Teacher</br>
+      <b>Brief Description:</b> Actor can view reports generated by the system based on the monitoring
+      of the user. System monitors documnets viewer if the uploader enabled monitoring option.</br>
+      <b>Typical Course of Events:</b>
+    </p>
+    <table border="1" style="width: 75%; margin-top: 0px">
+      <tr>
+        <th>Actor Action</th>
+        <th>System Response</th>
+      </tr>
+      <tr>
+        <td>1. Actor visits the website.</td>
+        <td>2. System shows the login page.</td>
+      </tr>
+      <tr>
+        <td>3. Actor enters his/her credentials.</td>
+        <td>4. System verifies the credentials and redirects to the user dashboard
+          where classes are visible.</td>
+      </tr>
+      <tr>
+        <td>5. Actor clicks on a class to enter.</td>
+        <td>6. System shows the stream of the class actor clicked on.</td>
+      </tr>
+      <tr>
+        <td>7. Actor clicks on <i>Materials</i> tab.</td>
+        <td>8. System directs to <i>Materials</i> tab and displays the uploaded documents
+          (if there is any).</td>
+      </tr>
+      <tr>
+        <td>9. Actor clicks on a document.</td>
+        <td>10. System pops up a window with information regarding the document.</td>
+      </tr>
+      <tr>
+        <td>11. Actor clicks on the option to view its interaction history.</td>
+        <td>12. System shows a list of users who interacted with the document.</td>
+      </tr>
+      <tr>
+        <td>13. Actor clicks on the name of a user in the list.</td>
+        <td>14. System displays the report it generated when the user in question viewed
+          the document.</td>
+      </tr>
+    </table>
+    <p style="padding-top: 0px; margin-top: 0px;">
+      <b>Alternate Course of Events:</b></br>
+      4.1 If email or/and password is not valid, system prompts user to re-enter it/them.</br>
+      4.2 After three attempts, system asks actor his/her registered email address.
+      System then sends a password reset link to the email address.</br>
+      4.2.1 If the email address does not exist in the database, system shows a warning that
+      the account does not exist.</br>
+      8.1 If there is no document to display, system shows "No document to display" message.</br>
+      12.1 If the monitoring option was not enabled, system prompts the message "Monitoring was
+      not enabled for this document".</br>
+      12.2 If no one interacted with the document since its upload, system prompts the message:
+      "No interaction recorded for this document".
+    </p>
+
+    </br>
+
+    <h4 id="i4_12">4.12 Updating a User</h4>
+    <p style="padding-bottom: 0px; margin-bottom: 0px;">
+      <b>Use Case Name:</b> Update a user</br>
+      <b>Use Case Type:</b> Primary</br>
+      <b>Actor(s):</b> System Admin</br>
+      <b>Brief Description:</b> Actor can update the details/information of any registered user.</br>
+      <b>Typical Course of Events:</b>
+    </p>
+    <table border="1" style="width: 75%; margin-top: 0px">
+      <tr>
+        <th>Actor Action</th>
+        <th>System Response</th>
+      </tr>
+      <tr>
+        <td>1. Actor visits the website.</td>
+        <td>2. System shows the login page.</td>
+      </tr>
+      <tr>
+        <td>3. Actor enters his/her credentials.</td>
+        <td>4. System verifies the credentials and redirects to the admin dashboard.</td>
+      </tr>
+      <tr>
+        <td>5. Actor clicks on the menu.</td>
+        <td>6. System expands the menu.</td>
+      </tr>
+      <tr>
+        <td>7. Actor clicks on the option to check users list.</td>
+        <td>8. System displays a list containing username and email of all users.</td>
+      </tr>
+      <tr>
+        <td>9. Actor searches a user.</td>
+        <td>10. System shows the users matching the search parametres.</td>
+      </tr>
+      <tr>
+        <td>11. Actor clicks on a user.</td>
+        <td>12. System pops up a window displaying the details of the user.</td>
+      </tr>
+      <tr>
+        <td>13. Actor modifies detail/s of the user and clicks on <i>Update</i>.</td>
+        <td>14. System verifies and updates the details/information of the user.</td>
+      </tr>
+    </table>
+    <p style="padding-top: 0px; margin-top: 0px;">
+      <b>Alternate Course of Events:</b></br>
+      4.1 If email or/and password is not valid, system prompts user to re-enter it/them.</br>
+      4.2 After three attempts, system asks actor his/her registered email address.
+      System then sends a password reset link to the email address.</br>
+      4.2.1 If the email address does not exist in the database, system shows a warning that
+      the account does not exist.</br>
+      8.1 If there is no registered user, system prompts "No registered user" message.</br>
+      10.1 If no user matches the search parametres, system prompts "No user matching the
+      search parametres".</br>
+      14.1 If any of the inputs does not safisfy the requirement, system prompts user to follow the
+      guidelines and re-enter.</br>
+      14.2 If any of the required fields are missing, system prompts user to fill it/them in.
+    </p>
+
+    </br>
+
+    <h4 id="i4_13">4.13 Deleting a User</h4>
+    <p style="padding-bottom: 0px; margin-bottom: 0px;">
+      <b>Use Case Name:</b> Delete a user</br>
+      <b>Use Case Type:</b> Primary</br>
+      <b>Actor(s):</b> System Admin</br>
+      <b>Brief Description:</b> Actor can delete any of the registered users.</br>
+      <b>Typical Course of Events:</b>
+    </p>
+    <table border="1" style="width: 75%; margin-top: 0px">
+      <tr>
+        <th>Actor Action</th>
+        <th>System Response</th>
+      </tr>
+      <tr>
+        <td>1. Actor visits the website.</td>
+        <td>2. System shows the login page.</td>
+      </tr>
+      <tr>
+        <td>3. Actor enters his/her credentials.</td>
+        <td>4. System verifies the credentials and redirects to the admin dashboard.</td>
+      </tr>
+      <tr>
+        <td>5. Actor clicks on the menu.</td>
+        <td>6. System expands the menu.</td>
+      </tr>
+      <tr>
+        <td>7. Actor clicks on the option to check users list.</td>
+        <td>8. System displays a list containing username and email of all users.</td>
+      </tr>
+      <tr>
+        <td>9. Actor searches a user.</td>
+        <td>10. System shows the users matching the search parametres.</td>
+      </tr>
+      <tr>
+        <td>11. Actor clicks on a user.</td>
+        <td>12. System pops up a window displaying the details of the user.</td>
+      </tr>
+      <tr>
+        <td>13. Actor clicks on <i>Delete the user</i>.</td>
+        <td>14. System displays a confirmation dialog asking the reason.</td>
+      </tr>
+      <tr>
+        <td>15. Actor enters the reason of deletion and confirms the action.</td>
+        <td>16. System records the event and deletes the user.</td>
+      </tr>
+    </table>
+    <p style="padding-top: 0px; margin-top: 0px;">
+      <b>Alternate Course of Events:</b></br>
+      4.1 If email or/and password is not valid, system prompts user to re-enter it/them.</br>
+      4.2 After three attempts, system asks actor his/her registered email address.
+      System then sends a password reset link to the email address.</br>
+      4.2.1 If the email address does not exist in the database, system shows a warning that
+      the account does not exist.</br>
+      8.1 If there is no registered user, system prompts "No registered user" message.</br>
+      10.1 If no user matches the search parametres, system prompts "No user matching the
+      search parametres".</br>
+      16.1 If no reason was provided, system prompts actor to enter it.
+    </p>
+  </div>
+
+  <div class="printable_content new_page">
+    <h3> 5. Other Nonfunctional Requirements</h3>
+
+    <h4 id="i5_1"> 5.1 Performance Requirements </h4>
+
+    <p>
+    <ul>
+      <li>The system should be able to access the webcam to process facial recognition, track eyes in real time with
+        zero delay and render documents to generate a report based on users activity.</li>
+      <li>All documents uploaded by the teacher should not be downloadable.</li>
+      <li>System should not take more than 5 seconds to appear when a teacher assign a task.</li>
+      <li>User must have good internet connection to provide better performance.</li>
+    </ul>
+    </p>
+
+    <h4 id="i5_2"> 5.2 Safety Requirements </h4>
+
+    <p>
+    <ul>
+      <li>User is responsible for content upload.</li>
+      <li>User may not post something derogatory.</li>
+    </ul>
+    </p>
+
+    <h4 id="i5_3"> 5.3 Security Requirements </h4>
+
+    <p>
+    <ul>
+      <li>User is responsible for maintaing his/her account.</li>
+      <li>User credentials should no be shared with anyone.</li>
+      <li>All users should be authenticated before granting access.</li>
+      <li>Student should be enrolled in a course before accessing its materials and attempting its assignments and
+        exams.</li>
+    </ul>
+
+    <h4 id="i5_4">5.4 Software Quality Attributes</h4>
+
+    <p>
+    <ul>
+      <li>As some features are in real time so, performance depends on the availibility of bandwidth.</li>
+      <li>Accurate and precise process must be performed by the system to avoid problems.</li>
+      <li>GUI of the system will be simple so everyone can easily understand.</li>
+      <li>The design of the Classroom system should allow to run on all widely used browsers.</li>
+    </ul>
+    </p>
+
+    <h4 id="i5_5">5.5 Business Rules</h4>
+
+    <p>
+    <ul>
+      <li>Administrator have a complete control to the system to edit, add/remove a user. Ensures valid information.
+      </li>
+      <li>Teacher will be able to remove any student and submit grade and edit any data.</li>
+      <li>Students will be able to join a class, post to class and see all other activities in class.</li>
+    </ul>
+    </p>
+  </div>
+
+
+  <div class="printable_content new_page">
+
+    <h3>6. Other Requirements </h3>
+    <p> This system requies a database and a server to store the data.</p>
+
+    <h3 id="i6_1">Appendix A: Glossary</h3>
+
+    <p><b>API :</b> API (Application Programming Interface) delivers the user response to the system and sends the
+      system's response back to the user.<br>
+      <br>
+      <b>Browser :</b> Browser to browse the system<br><br>
+      <b>Database :</b> Database is a collection of data that the system will collect from the user.<br>
+      <br>
+      <b>Platform :</b> Systems operation software.<br><br>
+      <b>SRS :</b> SRS (Software Requirements Specification) is a description of a software system. It provide a
+      detailed overview.<br><br>
+      <b>USER :</b> Students and the Teacher.<br><br>
+    </p>
+
+    <h3 id="i6_2">Appendix B: To Be Determined List</h3>
+    <p>In future we have plan to expand the features according to user demand like pdf scanner on mobile app to scan
+      handwritten documents.</p>
+
+  </div>
+</body>
+
+</html>
